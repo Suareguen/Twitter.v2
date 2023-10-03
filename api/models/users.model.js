@@ -1,5 +1,5 @@
 const { connection } = require('../../database/index.js')
-const { DataTypes, } = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 
 const User = connection.define("user", {
@@ -16,6 +16,8 @@ const User = connection.define("user", {
     type: DataTypes.ENUM("user", "admin"),
     defaultValue: "user",
   },
-});
+})
+
+
 
 module.exports = User
