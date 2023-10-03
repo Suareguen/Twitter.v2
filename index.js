@@ -13,6 +13,7 @@ const listenWithExpress = () => {
                             .use(express.json())
                             .use(morgan('dev'))
                             .use(cors())
+                            .use('/api', require('./api/routes/index.js'))
                             .listen(process.env.PORT, () => {
                                 console.log(
                                   `Listening on PORT ${process.env.PORT}`

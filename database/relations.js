@@ -11,11 +11,18 @@ const addRelationsToModels = () => {
 
     // Many to Many
     User.belongsToMany(Post, {
-       through: "users_posts"
+      through: "users_posts",
+      as: 'favouriteTweets'
     });
     Post.belongsToMany(User, {
-      through: "users_posts"
+      through: "users_posts",
+      as: 'favouriteByUser',
     });
+
+    //One to Many
+    User.hasMany(Post, { as:'posts' });
+    Post.belongsTo(User);
+
 
     //One to Many
     User.hasMany(Comment);
