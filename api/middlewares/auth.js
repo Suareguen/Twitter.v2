@@ -28,4 +28,18 @@ function checkAuth(req, res, next) {
   );
 }
 
-module.exports = { checkAuth };
+function checkAdmin(req, res, next) {
+    if(res.locals.user.role !== 'admin'){
+        return res.status(401).json('Admins only')
+    }
+    else {
+        next()
+    }
+
+}
+
+
+
+
+
+module.exports = { checkAuth, checkAdmin };

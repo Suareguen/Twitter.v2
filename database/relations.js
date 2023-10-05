@@ -20,7 +20,7 @@ const addRelationsToModels = () => {
     });
 
     //One to Many
-    User.hasMany(Post, { as:'posts' });
+    User.hasMany(Post, { as:'tweets' });
     Post.belongsTo(User);
 
 

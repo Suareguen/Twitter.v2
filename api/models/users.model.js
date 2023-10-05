@@ -16,6 +16,15 @@ const User = connection.define("user", {
       isEmail: true
     },
   },
+
+
+
+
+
+
+
+
+  
   password: {
     type: DataTypes.STRING,
     validate: {
