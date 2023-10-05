@@ -1,4 +1,6 @@
 const Post = require("../models/posts.model.js");
+const User = require('../models/users.model.js')
+
 
 const getAllTweets = async (req, res) => {
   try {
@@ -25,6 +27,14 @@ const getOneTweet = async (req, res) => {
 const createTweet = async (req, res) => {
   try {
     const tweet = await Post.create(req.body);
+    const user = await User.findOne({
+      where: {
+        id: res.locals.user.id
+      }
+    })
+    
+    await user.addTweet(tweet);
+
     return res.status(200).json({ tweet });
   } catch (error) {
     return res.status(500).json({ message: error.message });
