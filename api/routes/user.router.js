@@ -7,17 +7,20 @@ const {
   deleteUser
 } = require("../controllers/user.controller.js");
 
-const { checkAuth } =require('../middlewares/auth.js')
+const { checkAdmin } = require("../middlewares/auth.js");
 
 
-router.get('/',checkAuth, getAllUsers)
-router.get("/:userId", getOneUser)
 
-router.post("/", createUser);
+//Admin routes
 
-router.put('/:userId', updateUser)
+router.get('/',checkAdmin, getAllUsers)
+router.get("/:userId",checkAdmin, getOneUser)
 
-router.delete('/:userId', deleteUser)
+router.post("/",checkAdmin, createUser);
+
+router.put('/:userId',checkAdmin, updateUser)
+
+router.delete("/:userId", checkAdmin, deleteUser);
 
 
 module.exports = router;
