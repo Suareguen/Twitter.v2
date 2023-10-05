@@ -59,7 +59,6 @@ const deleteTweet = async (req, res) => {
     const tweet = await Post.destroy({
       where: { id: req.params.tweetId },
     });
-
     if (tweet) {
       return res.status(200).json({ message: "Tweet deleted" });
     } else {
