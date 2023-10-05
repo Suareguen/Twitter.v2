@@ -1,8 +1,8 @@
-const Tweet = require("../models/posts.model.js");
+const Post = require("../models/posts.model.js");
 
 const getAllTweets = async (req, res) => {
   try {
-    const tweets = await Tweet.findAll();
+    const tweets = await Post.findAll();
     return res.status(200).json({ tweets });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -11,7 +11,7 @@ const getAllTweets = async (req, res) => {
 
 const getOneTweet = async (req, res) => {
   try {
-    const tweet = await Tweet.findByPk(req.params.tweetId);
+    const tweet = await Post.findByPk(req.params.tweetId);
     if (tweet) {
       return res.status(200).json({ tweet });
     } else {
@@ -24,7 +24,7 @@ const getOneTweet = async (req, res) => {
 
 const createTweet = async (req, res) => {
   try {
-    const tweet = await Tweet.create(req.body);
+    const tweet = await Post.create(req.body);
     return res.status(200).json({ tweet });
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -33,7 +33,7 @@ const createTweet = async (req, res) => {
 
 const updateTweet = async (req, res) => {
   try {
-    const tweet = await Tweet.update(req.body, {
+    const tweet = await Post.update(req.body, {
       where: {
         id: req.params.tweetId,
       },
@@ -46,7 +46,7 @@ const updateTweet = async (req, res) => {
 
 const deleteTweet = async (req, res) => {
   try {
-    const tweet = await Tweet.destroy({
+    const tweet = await Post.destroy({
       where: { id: req.params.tweetId },
     });
 

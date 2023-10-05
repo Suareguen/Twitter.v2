@@ -1,4 +1,5 @@
 const User = require("../models/users.model.js");
+const ContactInfo = require('../models/contact_info.model.js')
 
 const getAllUsers = async (req, res) => {
   try {
@@ -24,8 +25,19 @@ const getOneUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
+    const userExists = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+    if(userExists) {
+      return res.status(409).send('User already exists!!!')
+    }
     const user = await User.create(req.body);
-    return res.status(200).json({ user });
+    const contactInfo = await ContactInfo.create(req.body)
+    await contactInfo.setUser(user)
+    
+    return res.status(200).json({ user, contactInfo });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
