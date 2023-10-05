@@ -68,10 +68,13 @@ async function deleteContactInfo(req, res) {
             return res.status(404).json({message: 'Contact Info not found'})
         }
     } catch (error) {
-        console.log('hola')
         return res.status(500).json({message: error.message})
     }
 }
+
+
+
+
 
 module.exports = {
     getAllContactInfos,

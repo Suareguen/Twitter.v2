@@ -23,7 +23,7 @@ function checkAuth(req, res, next) {
         return res.status(401).send("Token not valid");
       }
       res.locals.user = user;
-      next();
+      next()
     }
   );
 }
@@ -35,7 +35,6 @@ function checkAdmin(req, res, next) {
     else {
         next()
     }
-
 }
 
 
