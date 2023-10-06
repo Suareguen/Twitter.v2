@@ -77,10 +77,35 @@ const deleteUser = async (req, res) => {
   }
 };
 
+async function getUserProfile(req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: res.locals.user.id,
+      },
+      include: {
+        model: Post,
+        as: "tweets",
+        attributes: ["id", "title", "body", "likes"],
+      },
+    });
+    if (user) {
+      return res.status(200).json({ user });
+    } else {
+      return res.status(404).json("User not found");
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+
+
 module.exports = {
   getAllUsers,
   getOneUser,
   createUser,
   updateUser,
   deleteUser,
+  getUserProfile,
 };

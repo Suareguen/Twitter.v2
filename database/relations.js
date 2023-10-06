@@ -5,11 +5,13 @@ const Comment = require("../api/models/comments.model.js");
 
 const addRelationsToModels = () => {
   try {
-    // One to One
+    // One to One 
     User.hasOne(ContactInfo);
     ContactInfo.belongsTo(User);
 
-    // Many to Many
+    // Many to Many Users-Posts
+    // Definimos un alias las relaciones, ya que como tendremos las entidades de User y Post relacionadas dos veces
+    // necesitaremos saber a que relación nos refereimos más adelante.
     User.belongsToMany(Post, {
       through: "users_posts",
       as: 'favouriteTweets'
@@ -19,7 +21,7 @@ const addRelationsToModels = () => {
       as: 'favouriteByUser',
     });
 
-    //One to Many
+    //One to Many Users-Posts
     User.hasMany(Post, { as:'tweets' });
     Post.belongsTo(User);
 

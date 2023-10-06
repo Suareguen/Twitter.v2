@@ -4,7 +4,8 @@ const {
   getOneUser,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserProfile,
 } = require("../controllers/user.controller.js");
 
 const { checkAdmin } = require("../middlewares/auth.js");
