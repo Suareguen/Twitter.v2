@@ -12,6 +12,9 @@ const { checkAdmin } = require("../middlewares/auth.js");
 
 
 
+router.get("/profile", getUserProfile);
+
+
 //Admin routes
 
 router.get('/',checkAdmin, getAllUsers)
